@@ -49,9 +49,20 @@ end
 
 # config/routes.rb con influxdb
 Rails.application.routes.draw do
-  resources :performance_monitorings, only: [:index, :create, :update, :destroy]
+  resources :performance_monitorings, only: [ :create, :update, :destroy]
   # Route per GraphQL
   post '/graphql', to: 'graphql#execute'
 end
+
+# config/routes.rb per ArangoDB
+Rails.application.routes.draw do
+  # Rotte REST per RelazioneCelle
+  namespace :rest do
+    resources :relazione_celle, only: [:create, :update, :destroy]
+  end
+  # Rotta per le richieste GraphQL
+  post '/graphql', to: 'graphql#execute'
+end
+
 
 
