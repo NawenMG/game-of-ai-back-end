@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://example.com/users"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             name="UsersService"
+             targetNamespace="http://example.com/users">
+
+    <types>
+        <xsd:schema targetNamespace="http://example.com/users">
+            <xsd:element name="User">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="user_id" type="xsd:string"/>
+                        <xsd:element name="nome" type="xsd:string"/>
+                        <xsd:element name="cognome" type="xsd:string"/>
+                        <xsd:element name="username" type="xsd:string"/>
+                        <xsd:element name="email" type="xsd:string"/>
+                        <xsd:element name="password_hash" type="xsd:string"/>
+                        <xsd:element name="role" type="xsd:string"/>
+                        <xsd:element name="status" type="xsd:string"/>
+                        <xsd:element name="session_token" type="xsd:string"/>
+                        <xsd:element name="jwt_token" type="xsd:string"/>
+                        <xsd:element name="two_factor_enabled" type="xsd:boolean"/>
+                        <xsd:element name="profile_picture" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="FindUserByIdRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="FindUserByIdResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="user" type="tns:User" minOccurs="0"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="FindUserByUsernameRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="username" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="FindUserByUsernameResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="user" type="tns:User" minOccurs="0"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="CreateUserRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="user" type="tns:User"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="CreateUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="UpdateUserRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="user" type="tns:User"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="UpdateUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="DeleteUserRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="id" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="DeleteUserResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="message" type="xsd:string" minOccurs="0"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="FindAllUsersResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="users" type="tns:User" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SearchUsersByNameRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="name" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="SearchUsersByNameResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="users" type="tns:User" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="OrderUsersByRequest">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="attribute" type="xsd:string"/>
+                        <xsd:element name="direction" type="xsd:string"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+            <xsd:element name="OrderUsersByResponse">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="users" type="tns:User" minOccurs="0" maxOccurs="unbounded"/>
+                        <xsd:element name="error" type="xsd:string" minOccurs="0"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+
+        </xsd:schema>
+    </types>
+
+    <message name="FindUserByIdRequest">
+        <part name="parameters" element="tns:FindUserByIdRequest"/>
+    </message>
+    <message name="FindUserByIdResponse">
+        <part name="parameters" element="tns:FindUserByIdResponse"/>
+    </message>
+
+    <message name="FindUserByUsernameRequest">
+        <part name="parameters" element="tns:FindUserByUsernameRequest"/>
+    </message>
+    <message name="FindUserByUsernameResponse">
+        <part name="parameters" element="tns:FindUserByUsernameResponse"/>
+    </message>
+
+    <message name="CreateUserRequest">
+        <part name="parameters" element="tns:CreateUserRequest"/>
+    </message>
+    <message name="CreateUserResponse">
+        <part name="parameters" element="tns:CreateUserResponse"/>
+    </message>
+
+    <message name="UpdateUserRequest">
+        <part name="parameters" element="tns:UpdateUserRequest"/>
+    </message>
+    <message name="UpdateUserResponse">
+        <part name="parameters" element="tns:UpdateUserResponse"/>
+    </message>
+
+    <message name="DeleteUserRequest">
+        <part name="parameters" element="tns:DeleteUserRequest"/>
+    </message>
+    <message name="DeleteUserResponse">
+        <part name="parameters" element="tns:DeleteUserResponse"/>
+    </message>
+
+    <message name="FindAllUsersResponse">
+        <part name="parameters" element="tns:FindAllUsersResponse"/>
+    </message>
+
+    <message name="SearchUsersByNameRequest">
+        <part name="parameters" element="tns:SearchUsersByNameRequest"/>
+    </message>
+    <message name="SearchUsersByNameResponse">
+        <part name="parameters" element="tns:SearchUsersByNameResponse"/>
+    </message>
+
+    <message name="OrderUsersByRequest">
+        <part name="parameters" element="tns:OrderUsersByRequest"/>
+    </message>
+    <message name="OrderUsersByResponse">
+        <part name="parameters" element="tns:OrderUsersByResponse"/>
+    </message>
+
+    <portType name="UsersServicePortType">
+        <operation name="FindUserById">
+            <input message="tns:FindUserByIdRequest"/>
+            <output message="tns:FindUserByIdResponse"/>
+        </operation>
+        <operation name="FindUserByUsername">
+            <input message="tns:FindUserByUsernameRequest"/>
+            <output message="tns:FindUserByUsernameResponse"/>
+        </operation>
+        <operation name="CreateUser">
+            <input message="tns:CreateUserRequest"/>
+            <output message="tns:CreateUserResponse"/>
+        </operation>
+        <operation name="UpdateUser">
+            <input message="tns:UpdateUserRequest"/>
+            <output message="tns:UpdateUserResponse"/>
+        </operation>
+        <operation name="DeleteUser">
+            <input message="tns:DeleteUserRequest"/>
+            <output message="tns:DeleteUserResponse"/>
+        </operation>
+        <operation name="FindAllUsers">
+            <input message="tns:FindAllUsersRequest"/>
+            <output message="tns:FindAllUsersResponse"/>
+        </operation>
+        <operation name="SearchUsersByName">
+            <input message="tns:SearchUsersByNameRequest"/>
+            <output message="tns:SearchUsersByNameResponse"/>
+        </operation>
+        <operation name="OrderUsersBy">
+            <input message="tns:OrderUsersByRequest"/>
+            <output message="tns:OrderUsersByResponse"/>
+        </operation>
+    </portType>
+
+    <binding name="UsersServiceBinding" type="tns:UsersServicePortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <operation name="FindUserById">
+            <soap:operation soapAction="http://example.com/users/FindUserById"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="FindUserByUsername">
+            <soap:operation soapAction="http://example.com/users/FindUserByUsername"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="CreateUser">
+            <soap:operation soapAction="http://example.com/users/CreateUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="UpdateUser">
+            <soap:operation soapAction="http://example.com/users/UpdateUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="DeleteUser">
+            <soap:operation soapAction="http://example.com/users/DeleteUser"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="FindAllUsers">
+            <soap:operation soapAction="http://example.com/users/FindAllUsers"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="SearchUsersByName">
+            <soap:operation soapAction="http://example.com/users/SearchUsersByName"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+        <operation name="OrderUsersBy">
+            <soap:operation soapAction="http://example.com/users/OrderUsersBy"/>
+            <input>
+                <soap:body use="literal"/>
+            </input>
+            <output>
+                <soap:body use="literal"/>
+            </output>
+        </operation>
+    </binding>
+
+    <service name="UsersService">
+        <port name="UsersServicePort" binding="tns:UsersServiceBinding">
+            <soap:address location="http://example.com/users_service"/>
+        </port>
+    </service>
+</definitions>

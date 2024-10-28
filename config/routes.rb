@@ -12,3 +12,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 end
+
+
+# config/routes.rb con soap per la tabella postgresql users
+Rails.application.routes.draw do
+  # Rotta per il servizio SOAP, possiamo definire una rotta principale che si collega a tutte le operazioni del controller
+  post 'users_service', to: 'users_soap#users_service' 
+  
+  # Rotta per il WSDL
+  get 'users_service.wsdl', to: 'users_soap#wsdl'  #Definisce le operazioni disponibili
+end
+
+

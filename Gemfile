@@ -24,6 +24,12 @@ gem 'rethinkdb', '~> 2.3.0'
 #Cassandra ASSICURATI CHE IL CONTAINER SIA IN ESECUZIONE
 gem 'cassandra-driver', '~> 3.2', '>= 3.2.5'
 #Arango db
+#Faker
+gem 'faker', '~> 3.5', '>= 3.5.1'
+#bcrypt
+gem 'bcrypt', '~> 3.1', '>= 3.1.20'
+#SOAP API
+gem 'savon', '~> 2.15', '>= 2.15.1'
 ###############################################################################################################################
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
