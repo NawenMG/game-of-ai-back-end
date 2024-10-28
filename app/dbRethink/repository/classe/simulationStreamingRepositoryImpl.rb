@@ -4,8 +4,8 @@ include RethinkDB::Shortcuts
 
 require_relative 'simulation_streaming_repository_interface'
 
-class SimulationStreamingRepository
-  include SimulationStreamingRepositoryImpl
+class SimulationStreamingRepositoryImp
+  include SimulationStreamingRepository
 
   def initialize
     @r = RethinkDB::RQL.new

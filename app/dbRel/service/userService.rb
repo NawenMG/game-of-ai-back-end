@@ -1,7 +1,7 @@
 #Normale implementazione del service
 class UserService
-  def initialize(user_repository)
-    @user_repository = user_repository
+  def initialize(UserRepository)
+    @user_repository = UserRepository
   end
 
   # Trova un utente per ID

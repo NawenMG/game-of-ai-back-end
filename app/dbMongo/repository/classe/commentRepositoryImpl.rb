@@ -1,6 +1,5 @@
 # app/repositories/comment_repository_mongo.rb
-
-class CommentRepositoryMongo
+class CommentRepositoryImpl
   include CommentRepository
 
   def initialize

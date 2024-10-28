@@ -1,7 +1,7 @@
 # app/controllers/graphql_controller.rb
 class GraphqlController < ApplicationController
   def execute
-    result = MyAppSchema.execute(
+    result = gameOfLifeSchema.execute(
       params[:query],
       variables: ensure_hash(params[:variables]),
       context: {},
