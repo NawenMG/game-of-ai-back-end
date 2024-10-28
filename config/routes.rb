@@ -18,7 +18,6 @@ end
 Rails.application.routes.draw do
   # Rotta per il servizio SOAP, possiamo definire una rotta principale che si collega a tutte le operazioni del controller
   post 'users_service', to: 'users_soap#users_service' 
-  
   # Rotta per il WSDL
   get 'users_service.wsdl', to: 'users_soap#wsdl'  #Definisce le operazioni disponibili
 end
@@ -27,7 +26,6 @@ end
 
 # config/routes.rb con rest e soap per la collezione mongo
 # config/routes.rb
-
 Rails.application.routes.draw do
   # Rotta per GraphQL
   post '/graphql', to: 'graphql#execute'
@@ -39,5 +37,13 @@ Rails.application.routes.draw do
   end
 end
 
-
+# config/routes.rb
+Rails.application.routes.draw do
+  mount ActionCable.server => '/cable' # WebSocket
+  resources :simulation_streaming, only: [:create, :update, :destroy] do
+    collection do
+      get :stream_simulations
+    end
+  end
+end
 

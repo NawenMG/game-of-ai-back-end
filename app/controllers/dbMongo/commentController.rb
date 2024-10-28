@@ -2,7 +2,7 @@
 
 class CommentsController < ApplicationController
   def initialize
-    @repository = CommentRepositoryMongo.new
+    @repository = CommentRepository.new
     @service = CommentService.new(@repository)
   end
 
