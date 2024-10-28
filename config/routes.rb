@@ -24,3 +24,20 @@ Rails.application.routes.draw do
 end
 
 
+
+# config/routes.rb con rest e soap per la collezione mongo
+# config/routes.rb
+
+Rails.application.routes.draw do
+  # Rotta per GraphQL
+  post '/graphql', to: 'graphql#execute'
+
+  resources :comments, only: [:create, :update, :destroy] do
+    collection do
+      get 'order', to: 'comments#order'
+    end
+  end
+end
+
+
+

@@ -30,6 +30,9 @@ gem 'faker', '~> 3.5', '>= 3.5.1'
 gem 'bcrypt', '~> 3.1', '>= 3.1.20'
 #SOAP API
 gem 'savon', '~> 2.15', '>= 2.15.1'
+#Graphql
+gem 'graphql', '~> 2.3', '>= 2.3.19'
+gem 'graphql-batch', '~> 0.6.0'
 ###############################################################################################################################
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
