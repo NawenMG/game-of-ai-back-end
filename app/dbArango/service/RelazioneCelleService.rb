@@ -1,26 +1,31 @@
-# app/services/relazione_celle_service.rb
-class RelazioneCelleService
-  def initialize(repository = RelazioneCelleRepositoryImpl.new)
-    @repository = repository
+# app/services/relazione_cella_service.rb
+class RelazioneCellaService
+  def initialize
+    @repository = RelazioneCelleRepositoryImpl.new
   end
 
-  def get_all
+  # Recupera tutte le relazioni
+  def get_all_relationships
     @repository.get_all
   end
 
-  def find_by_id(id)
+  # Recupera una relazione per ID
+  def get_relationship_by_id(id)
     @repository.find_by_id(id)
   end
 
-  def create(attributes)
+  # Crea una nuova relazione
+  def create_relationship(attributes)
     @repository.create(attributes)
   end
 
-  def update(id, attributes)
+  # Aggiorna una relazione esistente
+  def update_relationship(id, attributes)
     @repository.update(id, attributes)
   end
 
-  def delete(id)
+  # Elimina una relazione per ID
+  def delete_relationship(id)
     @repository.delete(id)
   end
 end

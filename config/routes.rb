@@ -56,12 +56,11 @@ end
 
 # config/routes.rb per ArangoDB
 Rails.application.routes.draw do
-  # Rotte REST per RelazioneCelle
-  namespace :rest do
-    resources :relazione_celle, only: [:create, :update, :destroy]
-  end
-  # Rotta per le richieste GraphQL
   post '/graphql', to: 'graphql#execute'
+  # Routes per le celle
+  resources :cella, only: [:create, :update, :destroy]
+  # Routes per le relazioni
+  resources :relazione_cella, only: [:create, :update, :destroy]
 end
 
 

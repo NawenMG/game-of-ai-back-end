@@ -1,22 +1,22 @@
-# app/repositories/relazione_celle_repository.rb
-module RelazioneCelleRepository
+# app/repositories/cella_repository_interface.rb
+module CellaRepositoryImpl
   def get_all
-    raise NotImplementedError
+    raise NotImplementedError, "Questo metodo deve essere implementato"
   end
 
   def find_by_id(id)
-    raise NotImplementedError
+    raise NotImplementedError, "Questo metodo deve essere implementato"
   end
 
   def create(attributes)
-    raise NotImplementedError
+    raise NotImplementedError, "Questo metodo deve essere implementato"
   end
 
   def update(id, attributes)
-    raise NotImplementedError
+    raise NotImplementedError, "Questo metodo deve essere implementato"
   end
 
   def delete(id)
-    raise NotImplementedError
+    raise NotImplementedError, "Questo metodo deve essere implementato"
   end
 end

@@ -1,18 +1,13 @@
-# app/models/relazione_celle.rb
-class RelazioneCelle
-  include Arango::Model
+# app/models/relation_cella.rb
+class RelazioneCella
+  include ArangoDB::Document # Assicurati di avere il supporto per ArangoDB
 
-  # Definizione dei campi della collezione
-  attribute :cell_id, String
-  attribute :simulation_id, String
-  attribute :relationship_type, String
-  attribute :timestamp, Time
+  # Definizione della struttura del modello
+  attr_accessor :from, :to, :relationship
 
-  #nome della collezione in arango
-  collection :relazione_celle
-
-  # Metodo per inizializzare un nuovo oggetto
-  def initialize(attributes = {})
-    super(attributes)
+  def initialize(from:, to:, relationship:)
+    @from = from
+    @to = to
+    @relationship = relationship
   end
 end

@@ -1,35 +1,33 @@
-# app/repositories/relazione_celle_repository_impl.rb
-require 'arangodb'
-
-class RelazioneCelleRepositoryImpl
-  include RelazioneCelleRepository
+# app/repositories/relazione_cella_repository.rb
+class RelazioneCellaRepositoryImpl
+  include RelazioneCelleRepositoryImpl # Riutilizziamo l'interfaccia
 
   def initialize
-    @db = Arango::Database.new(name: 'your_database_name', host: 'localhost', port: 8529, username: 'root', password: 'your_password')
+    @db = ArangoDB::Database.new('mydatabase') # Modifica secondo le tue configurazioni
   end
 
-  # Metodo GET: Recupera tutte le relazioni
+  # Recupera tutte le relazioni
   def get_all
-    @db.collection('relazione_celle').all
+    @db.collection('relazione_cella').all
   end
 
-  # Metodo GET: Recupera una relazione per ID
+  # Recupera una relazione per ID
   def find_by_id(id)
-    @db.collection('relazione_celle').document(id)
+    @db.collection('relazione_cella').get(id)
   end
 
-  # Metodo POST: Inserisce una nuova relazione
+  # Inserisce una nuova relazione
   def create(attributes)
-    @db.collection('relazione_celle').insert(attributes)
+    @db.collection('relazione_cella').insert(attributes)
   end
 
-  # Metodo PUT: Aggiorna una relazione esistente
+  # Aggiorna una relazione esistente
   def update(id, attributes)
-    @db.collection('relazione_celle').replace(id, attributes)
+    @db.collection('relazione_cella').update(id, attributes)
   end
 
-  # Metodo DELETE: Elimina una relazione per ID
+  # Elimina una relazione per ID
   def delete(id)
-    @db.collection('relazione_celle').delete(id)
+    @db.collection('relazione_cella').delete(id)
   end
 end
