@@ -63,5 +63,14 @@ Rails.application.routes.draw do
   resources :relazione_cella, only: [:create, :update, :destroy]
 end
 
+#Per Cassandra
+Rails.application.routes.draw do
+  # Rotte per il controller REST
+  resources :archiviazione_simulazioni, only: [:create, :update, :destroy]
+
+  # Rotte per il controller GraphQL
+  post "/graphql", to: "graphql_archiviazione_simulazioni#execute"
+end
+
 
 
