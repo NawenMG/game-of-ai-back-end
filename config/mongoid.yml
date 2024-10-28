@@ -1,0 +1,29 @@
+development:
+  # Configure available database clients. (required)
+  clients:
+    # Defines the default client. (required)
+    default:
+      database: game_of_life_development
+      hosts:
+        - localhost:27017
+      options:
+       
+  # Configure Mongoid-specific options. (optional)
+  options:
+   
+
+  # Configure Driver-specific options. (optional)
+  driver_options:
+   
+
+
+test:
+  clients:
+    default:
+      database: game_of_life_test
+      hosts:
+        - localhost:27017
+      options:
+        read:
+          mode: :primary
+        max_pool_size: 1
