@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   end
 end
 
-# config/routes.rb
+# config/routes.rb con rethinkdb e websocket
 Rails.application.routes.draw do
   mount ActionCable.server => '/cable' # WebSocket
   resources :simulation_streaming, only: [:create, :update, :destroy] do
@@ -46,4 +46,12 @@ Rails.application.routes.draw do
     end
   end
 end
+
+# config/routes.rb con influxdb
+Rails.application.routes.draw do
+  resources :performance_monitorings, only: [:index, :create, :update, :destroy]
+  # Route per GraphQL
+  post '/graphql', to: 'graphql#execute'
+end
+
 
