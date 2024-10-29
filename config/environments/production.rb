@@ -16,6 +16,9 @@ Rails.application.configure do
   config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
+  # Configura la cache distribuita usando Redis
+  config.cache_store = :redis_cache_store, { url: 'redis://localhost:6379/0' } # Modifica l'URL se necessario
+
   # Ensures that a master key has been made available in ENV["RAILS_MASTER_KEY"], config/master.key, or an environment
   # key such as config/credentials/production.key. This key is used to decrypt credentials (and other encrypted files).
   # config.require_master_key = true
@@ -60,7 +63,7 @@ Rails.application.configure do
     .then { |logger| ActiveSupport::TaggedLogging.new(logger) }
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # "info" includes generic and useful information about system operation, but avoids logging too much
   # information to avoid inadvertent exposure of personally identifiable information (PII). If you

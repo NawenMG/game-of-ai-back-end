@@ -1,6 +1,10 @@
 # app/models/user.rb
-
 class User < ApplicationRecord
+  # Includi i moduli di Devise
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :jwt_authenticatable, jwt_revocation_strategy: Devise::JWT::RevocationStrategies::Null
+
   # Sicurezza per la password
   has_secure_password
 

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package gameOfAi;
+
+// Messaggio di richiesta
+message GameOfLifeRequest {
+    string file_content = 1; // Contenuto del file .txt
+}
+
+// Messaggio di risposta
+message GameOfLifeResponse {
+    repeated int32 final_state = 1; // Stato finale
+    repeated int32 predicted_state = 2; // Stato predetto
+}
+
+// Servizio GameOfLife
+service GameOfLife {
+    rpc ProcessFile(GameOfLifeRequest) returns (GameOfLifeResponse);
+}

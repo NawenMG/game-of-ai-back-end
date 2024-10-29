@@ -4,7 +4,11 @@ class Users::SessionsController < Devise::SessionsController
 
   private
 
-  def respond_with(resource, _opts = {}) #Login
+  def respond_with(resource, _opts = {}) # Login
+    # Invia un messaggio a Kafka per il login riuscito
+    success_message = "User logged in successfully: #{resource.to_json}"
+    $kafka.deliver_message(success_message, topic: 'user_logins')
+
     render json: {
       message: 'Login effettuato con successo!',
       user: resource,
@@ -12,7 +16,11 @@ class Users::SessionsController < Devise::SessionsController
     }, status: :ok
   end
 
-  def respond_to_on_destroy #Logout
+  def respond_to_on_destroy # Logout
+    # Invia un messaggio a Kafka per il logout
+    logout_message = "User logged out: #{current_user&.to_json || 'Unknown user'}"
+    $kafka.deliver_message(logout_message, topic: 'user_logouts')
+
     render json: { message: 'Logout effettuato con successo!' }, status: :ok
   end
 

@@ -40,6 +40,19 @@ gem 'google-cloud-datastore', '~> 2.10'
 gem 'devise', '~> 4.9', '>= 4.9.4' 
 gem 'devise-jwt', '~> 0.12.1'
 gem 'rotp', '~> 6.3' #Per l'autenticazione a due fattori
+#GRPC
+gem 'grpc', '~> 1.67'
+gem 'grpc-tools', '~> 1.67'
+#Google cloud storage
+gem 'google-cloud-storage', '~> 1.52'
+#Kafka
+gem 'ruby-kafka', '~> 1.5'
+#Google cloud pub sub
+gem 'google-cloud-pubsub', '~> 2.19'
+#Redis
+gem 'redis', '~> 5.3'
+#Mail
+gem 'actionmailer', '~> 7.2', '>= 7.2.1.2'
 ###############################################################################################################################
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"

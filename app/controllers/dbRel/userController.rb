@@ -1,31 +1,49 @@
+# app/controllers/users_soap_controller.rb
 class UsersSoapController < ApplicationController
-  protect_from_forgery with: :null_session #Disabilitazione protezione csrf in caso di soap
+  protect_from_forgery with: :null_session # Disabilitazione protezione CSRF in caso di SOAP
 
-  def users_service #Elaborazione dell'operazione soap
+  def users_service # Elaborazione dell'operazione SOAP
     request_body = request.body.read
     response_body = handle_soap_request(request_body)
     render xml: response_body, content_type: 'text/xml'
   end
 
-  def wsdl #Elaborazione delle condizioni wsdl
+  def wsdl # Elaborazione delle condizioni WSDL
     wsdl_path = Rails.root.join('app', 'services', 'wsdl', 'users_service.wsdl')
     render xml: File.read(wsdl_path), content_type: 'text/xml'
   end
 
   private
 
-  def handle_soap_request(request) #Questo metodo è privato e gestisce il corpo della richiesta SOAP. Chiama parse_soap_request per convertire il contenuto XML in un formato più utilizzabile
+  def handle_soap_request(request) # Questo metodo è privato e gestisce il corpo della richiesta SOAP
     savon_request = parse_soap_request(request)
+    action = savon_request[:action]
 
-    case savon_request[:action]
+    # Invia un messaggio a Kafka per l'azione eseguita
+    success_message = "SOAP action executed: #{action}, params: #{savon_request[:params]}"
+    $kafka.deliver_message(success_message, topic: 'soap_users')
+
+    case action
     when "FindUserById"
       user_id = savon_request[:params][:id]
-      user = @user_service.find_user_by_id(user_id)
+      user = fetch_user_by_id(user_id) # Usa il metodo per gestire la cache
       build_response(user)
     when "FindUserByUsername"
       username = savon_request[:params][:username]
-      user = @user_service.find_user_by_username(username)
+      user = fetch_user_by_username(username) # Usa il metodo per gestire la cache
       build_response(user)
+    when "FindAllUsers"
+      users = fetch_all_users # Usa il metodo per gestire la cache
+      build_response(users)
+    when "SearchUsersByName"
+      name = savon_request[:params][:name]
+      users = fetch_users_by_name(name) # Usa il metodo per gestire la cache
+      build_response(users)
+    when "OrderUsersBy"
+      attribute = savon_request[:params][:attribute]
+      direction = savon_request[:params][:direction]
+      users = fetch_users_ordered_by(attribute, direction) # Usa il metodo per gestire la cache
+      build_response(users)
     when "CreateUser"
       user_params = savon_request[:params][:user]
       result = @user_service.create_user(user_params)
@@ -38,25 +56,48 @@ class UsersSoapController < ApplicationController
       user_id = savon_request[:params][:id]
       result = @user_service.delete_user(user_id)
       build_response(result)
-    when "FindAllUsers"
-      users = @user_service.find_all_users
-      build_response(users)
-    when "SearchUsersByName"
-      name = savon_request[:params][:name]
-      users = @user_service.search_users_by_name(name)
-      build_response(users)
-    when "OrderUsersBy"
-      attribute = savon_request[:params][:attribute]
-      direction = savon_request[:params][:direction]
-      users = @user_service.order_users_by(attribute, direction)
-      build_response(users)
     else
       "<error>Unsupported action</error>"
     end
   end
 
+  def fetch_user_by_id(user_id)
+    local_cache_key = "soap/find_user_by_id/#{user_id}"
+    Rails.cache.fetch(local_cache_key, expires_in: 6.hours) do
+      @user_service.find_user_by_id(user_id)
+    end
+  end
+
+  def fetch_user_by_username(username)
+    local_cache_key = "soap/find_user_by_username/#{username}"
+    Rails.cache.fetch(local_cache_key, expires_in: 6.hours) do
+      @user_service.find_user_by_username(username)
+    end
+  end
+
+  def fetch_all_users
+    local_cache_key = "soap/find_all_users"
+    Rails.cache.fetch(local_cache_key, expires_in: 6.hours) do
+      @user_service.find_all_users
+    end
+  end
+
+  def fetch_users_by_name(name)
+    local_cache_key = "soap/search_users_by_name/#{name}"
+    Rails.cache.fetch(local_cache_key, expires_in: 6.hours) do
+      @user_service.search_users_by_name(name)
+    end
+  end
+
+  def fetch_users_ordered_by(attribute, direction)
+    local_cache_key = "soap/order_users_by/#{attribute}/#{direction}"
+    Rails.cache.fetch(local_cache_key, expires_in: 6.hours) do
+      @user_service.order_users_by(attribute, direction)
+    end
+  end
+
   def parse_soap_request(request)
-    doc = Nokogiri::XML(request) #Per analizzare le richieste xml
+    doc = Nokogiri::XML(request) # Per analizzare le richieste XML
     action = doc.xpath('//Body/*').first.name # Ottieni il nome dell'azione
     params = {}
 
@@ -103,7 +144,7 @@ class UsersSoapController < ApplicationController
     { action: action, params: params }
   end
 
-  def build_response(data) #Response
+  def build_response(data) # Response
     if data.is_a?(Hash) && data[:error]
       "<error>#{data[:error]}</error>"
     else

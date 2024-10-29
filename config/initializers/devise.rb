@@ -1,44 +1,52 @@
 Devise.setup do |config|
-  config.mailer_sender = 'inserisciemail@gmail.it'
+  # Imposta il mittente delle email
+  config.mailer_sender = 'noreply@tuodominio.com'
 
+  # Configurazione dell'ORM (Mongoid)
   require 'devise/orm/mongoid'
 
-  config.case_insensitive_keys = [:email] #Rendiamo case sensitive l'email
+  # Configurazione per le chiavi case insensitive
+  config.case_insensitive_keys = [:email]
 
-  config.strip_whitespace_keys = [:email] #Eliminazione di eventuali spazi bianchi
+  # Rimuove spazi bianchi dall'email
+  config.strip_whitespace_keys = [:email]
 
-  config.skip_session_storage = [:http_auth] #Evita di salvare le sessioni in http auth
+  # Salta la sessione http_auth
+  config.skip_session_storage = [:http_auth]
 
-  config.stretches = Rails.env.test? ? 1 : 12 #Crittografia della password
+  # Imposta il numero di "stretch" per la crittografia della password
+  config.stretches = Rails.env.test? ? 1 : 12
 
-  config.reconfirmable = true #In caso di cambiamento dell'email si deve avere una riconferma
+  # Riconferma necessaria per il cambio email
+  config.reconfirmable = true
 
-  config.expire_all_remember_me_on_sign_out = true #Cancella i "rember me" con il logout
+  # Elimina il "remember me" al logout
+  config.expire_all_remember_me_on_sign_out = true
 
-  config.password_length = 10..128 #Lunghezza minima e massima della password
+  # Lunghezza minima e massima per le password
+  config.password_length = 8..128
 
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/ #Validazione del formato dell'email
+  # Regex per la validazione dell'email
+  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
 
-  config.reset_password_within = 6.hours #Validità  temporale del token
+  # Validità del token per il reset della password
+  config.reset_password_within = 6.hours
 
-  config.sign_out_via = :delete #Metodo per il logout
+  # Metodo per il logout
+  config.sign_out_via = :delete
 
-  config.responder.error_status = :unprocessable_entity  #Codice per gli errori
-  config.responder.redirect_status = :see_other #Codice per il redirect
-
-   # Configurazione jwt con la chiave segreta dell'app Rails
-   config.jwt do |jwt|
-    jwt.secret = OpenSSL::PKey::RSA.new(Rails.application.credentials[:devise_jwt_private_key])
-    jwt.public_key = OpenSSL::PKey::RSA.new(Rails.application.credentials[:devise_jwt_public_key])    
-    jwt.dispatch_requests = [ #Login
-      ['POST', %r{^/login$}]
+  # Configurazione dei JWT
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.credentials.devise_jwt_secret || 's3cret' # Imposta una chiave segreta
+    jwt.dispatch_requests = [
+      ['POST', %r{^/login$}],
+      ['POST', %r{^/users/sign_in$}]
     ]
-    jwt.revocation_requests = [ #Logout
-      ['DELETE', %r{^/logout$}]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^/logout$}],
+      ['DELETE', %r{^/users/sign_out$}]
     ]
     jwt.expiration_time = 6.hours.to_i
-
-    jwt.algorithm = 'PS512' 
-
+    jwt.algorithm = 'HS256' # Puoi cambiare in PS512 se hai bisogno di una firma RSA
   end
 end
