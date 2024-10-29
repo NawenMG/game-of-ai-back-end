@@ -27,7 +27,7 @@ gem 'cassandra-driver', '~> 3.2', '>= 3.2.5'
 gem 'arangorb', '~> 2.0', '>= 2.0.1'
 #Faker
 gem 'faker', '~> 3.5', '>= 3.5.1'
-#bcrypt
+#bcrypt(user password)
 gem 'bcrypt', '~> 3.1', '>= 3.1.20'
 #SOAP API
 gem 'savon', '~> 2.15', '>= 2.15.1'
@@ -36,6 +36,10 @@ gem 'graphql', '~> 2.3', '>= 2.3.19'
 gem 'graphql-batch', '~> 0.6.0'
 #Google Cloud datastore for key_value
 gem 'google-cloud-datastore', '~> 2.10'
+#SECURITY
+gem 'devise', '~> 4.9', '>= 4.9.4' 
+gem 'devise-jwt', '~> 0.12.1'
+gem 'rotp', '~> 6.3' #Per l'autenticazione a due fattori
 ###############################################################################################################################
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
