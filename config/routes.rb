@@ -87,4 +87,14 @@ Rails.application.routes.draw do
 end
 
 
+#Per google cloud datastore db key
+# config/routes.rb
+Rails.application.routes.draw do
+  # Routes REST
+  resources :save_configurations, only: [:create, :update, :destroy]
+  # Routes GraphQL
+  post '/graphql', to: 'graphql#execute'
+end
+
+
 
