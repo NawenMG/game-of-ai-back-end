@@ -72,5 +72,19 @@ Rails.application.routes.draw do
   post "/graphql", to: "graphql_archiviazione_simulazioni#execute"
 end
 
+#Per google cloud sql 
+# config/routes.rb
+Rails.application.routes.draw do
+  # Rotte REST per SimulationResults
+  resources :simulation_results, only: [:create, :update, :destroy] do
+    collection do
+      get 'all', to: 'simulation_results#all'
+      get ':simulation_name', to: 'simulation_results#show_by_name', as: 'show_by_name'
+    end
+  end
+  # Rotte GraphQL per SimulationResults
+  post '/graphql', to: 'simulation_results_graphql#execute'
+end
+
 
 

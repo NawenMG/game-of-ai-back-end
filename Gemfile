@@ -18,12 +18,13 @@ gem 'mongoid', '~> 9.0'
 #Supporto BSON
 gem 'bson', '~> 5.0'
 #InfluxDB
-gem 'influxdb', '~> 0.8.1'
+gem 'influxdb-client', '~> 3.1'
 #RethinkDB ASSICURATI CHE IL CONTAINER SIA IN ESECUZIONE
 gem 'rethinkdb', '~> 2.3.0'
 #Cassandra ASSICURATI CHE IL CONTAINER SIA IN ESECUZIONE
 gem 'cassandra-driver', '~> 3.2', '>= 3.2.5'
 #Arango db
+gem 'arangorb', '~> 2.0', '>= 2.0.1'
 #Faker
 gem 'faker', '~> 3.5', '>= 3.5.1'
 #bcrypt
@@ -33,6 +34,8 @@ gem 'savon', '~> 2.15', '>= 2.15.1'
 #Graphql
 gem 'graphql', '~> 2.3', '>= 2.3.19'
 gem 'graphql-batch', '~> 0.6.0'
+#Google Cloud datastore for key_value
+gem 'google-cloud-datastore', '~> 2.10'
 ###############################################################################################################################
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"

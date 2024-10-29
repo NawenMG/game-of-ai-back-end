@@ -1,4 +1,5 @@
-class ArchiviazioneSimulazioniGraphqlController < ApplicationController
+# app/controllers/graphql_controller.rb
+class SimulationResultsGraphQLController < ApplicationController
   def execute
     result = gameOfLifeSchema.execute(
       params[:query],
@@ -11,7 +12,6 @@ class ArchiviazioneSimulazioniGraphqlController < ApplicationController
 
   private
 
-  # Per assicurarti che i parametri delle variabili siano un hash
   def ensure_hash(ambiguous_param)
     case ambiguous_param
     when String

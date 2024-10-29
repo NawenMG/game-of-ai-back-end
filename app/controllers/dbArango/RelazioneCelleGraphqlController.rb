@@ -1,5 +1,5 @@
 # app/controllers/graphql_controller.rb
-class GraphqlController < ApplicationController
+class RelazioCelleGraphqlController < ApplicationController
   # POST /graphql
   def execute
     query = params[:query]

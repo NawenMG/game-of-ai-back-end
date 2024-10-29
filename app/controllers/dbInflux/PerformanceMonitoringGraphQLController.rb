@@ -1,5 +1,5 @@
 # app/controllers/graphql_controller.rb
-class GraphqlController < ApplicationController
+class PerformanceMonitoringGraphQLController < ApplicationController
   def execute
     result = gameOfLifeSchema.execute(params[:query], variables: ensure_hash(params[:variables]))
     render json: result

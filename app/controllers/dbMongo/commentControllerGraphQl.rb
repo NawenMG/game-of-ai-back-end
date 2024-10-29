@@ -1,5 +1,5 @@
 # app/controllers/graphql_controller.rb
-class GraphqlController < ApplicationController
+class commentControllerGraphQl < ApplicationController
   def execute
     result = gameOfLifeSchema.execute(
       params[:query],

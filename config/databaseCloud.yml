@@ -1,0 +1,10 @@
+#PostgreSQl in google cloud SQL
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: myuser
+  password: mypassword
+  host: # Questo sarà `127.0.0.1` se usi il Cloud SQL Proxy
+  database: your_database_name
+  port: 5432
