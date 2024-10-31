@@ -20,7 +20,7 @@ gem 'bson', '~> 5.0'
 #InfluxDB
 gem 'influxdb-client', '~> 3.1'
 #RethinkDB ASSICURATI CHE IL CONTAINER SIA IN ESECUZIONE
-gem 'rethinkdb', '~> 2.3.0'
+gem 'rethinkdb', '~> 2.4.0'
 #Cassandra ASSICURATI CHE IL CONTAINER SIA IN ESECUZIONE
 gem 'cassandra-driver', '~> 3.2', '>= 3.2.5'
 #Arango db
