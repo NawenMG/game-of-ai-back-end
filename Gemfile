@@ -52,7 +52,7 @@ gem 'google-cloud-pubsub', '~> 2.19'
 #Redis
 gem 'redis', '~> 5.3'
 #Mail
-gem 'actionmailer', '~> 7.2', '>= 7.2.1.2'
+gem 'actionmailer', '~> 7.2'
 ###############################################################################################################################
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
