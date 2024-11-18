@@ -32,7 +32,7 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.20'
 #SOAP API
 gem 'savon', '~> 2.15', '>= 2.15.1'
 #Graphql
-gem 'graphql', '~> 2.3', '>= 2.3.19'
+gem 'graphql', '~> 2.4'
 gem 'graphql-batch', '~> 0.6.0'
 #Google Cloud datastore for key_value
 gem 'google-cloud-datastore', '~> 2.10'
