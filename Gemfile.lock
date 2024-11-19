@@ -90,7 +90,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (6.2.2)
       racc
-    bson (5.0.1)
+    bson (5.0.2)
     builder (3.3.0)
     capybara (3.40.0)
       addressable
