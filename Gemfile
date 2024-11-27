@@ -18,7 +18,7 @@ gem 'mongoid', '~> 9.0'
 #Supporto BSON
 gem 'bson', '~> 5.0'
 #InfluxDB
-gem 'influxdb-client', '~> 3.1'
+gem 'influxdb-client', '~> 3.2'
 #RethinkDB ASSICURATI CHE IL CONTAINER SIA IN ESECUZIONE
 gem 'rethinkdb', '~> 2.3.0'
 #Cassandra ASSICURATI CHE IL CONTAINER SIA IN ESECUZIONE

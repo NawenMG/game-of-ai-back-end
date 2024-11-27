@@ -257,7 +257,8 @@ GEM
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
-    influxdb-client (3.1.0)
+    influxdb-client (3.2.0)
+      csv
     io-console (0.7.2)
     ione (1.2.5)
     irb (1.14.1)
@@ -522,7 +523,7 @@ DEPENDENCIES
   grpc (~> 1.67)
   grpc-tools (~> 1.67)
   importmap-rails
-  influxdb-client (~> 3.1)
+  influxdb-client (~> 3.2)
   jbuilder
   mongoid (~> 9.0)
   pg
